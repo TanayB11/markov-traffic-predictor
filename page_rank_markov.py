@@ -40,7 +40,7 @@ def main():
     # cannot eigensolve, P is noninvertible
     # simluate_eig(trans_mat)
 
-    result = run_markov_chain(START_LINK, trans_mat, 100)
+    result = run_markov_chain(START_LINK, trans_mat, 1000)
     print(result)
 
 
