@@ -1,10 +1,9 @@
 from bs4 import BeautifulSoup as bs
 from collections import deque
-import requests, re, sys
+import requests, re, json
 import numpy as np
 
 START_PAGE = 'https://tanaybiradar.com'
-MAX_STACK_DEPTH = 4
 MAT_SIZE = 500
 freq_mat = np.zeros((MAT_SIZE, MAT_SIZE))
 link_ids = {} # key = link, value = index in freq matrix
@@ -50,7 +49,7 @@ def main():
     q = deque()
     q.append(START_PAGE)
 
-    while len(link_ids) < MAT_SIZE: # modified bfs on link tree
+    while len(link_ids) < MAT_SIZE: # modified bfs on link graph
         page = q.popleft() # dequeue
         links = crawl(page)
         crawled.add(page)
@@ -61,6 +60,8 @@ def main():
                 q.append(link)
 
     np.savetxt('freq_mat.out', freq_mat)
+    with open('link_ids.json', 'w') as fout:
+        fout.write(json.dumps(link_ids))
 
 if __name__ == '__main__':
     main()
