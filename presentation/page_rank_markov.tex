@@ -1,0 +1,109 @@
+\documentclass{beamer}
+\usetheme[nofirafonts]{focus}
+
+% Figures
+\usepackage{tikzit}
+\input{./figures/styles.tikzstyles}
+\usepackage{graphicx}
+\graphicspath{ {./figures/} }
+
+
+% Title page details
+\title[Markov Chains]{Markov Chains}
+\subtitle{Website Traffic Prediction}
+\institute{Tanay Biradar}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Website Traffic and PageRank}
+  \begin{itemize}
+    \item Search engines use popularity to rank pages
+    \item Popularity can be quantified by links to a page
+      \begin{itemize}
+        \item Works in theory, can be abused in practice
+      \end{itemize}
+    \item Google used a Markov Model (PageRank) to rank popularity
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Website Traffic and PageRank}
+  “PageRank works by counting the number and quality of links to a page to
+  determine a rough estimate of how important the website is. The underlying
+  assumption is that more important websites are likely to receive more links
+  from other websites.”
+  \footnote{https://en.wikipedia.org/wiki/PageRank}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Central Question}
+  Which page is a user most likely to land on after starting on a given page?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Model}
+  \begin{itemize}
+    \item Represent the internet as a directed graph
+        \begin{itemize}
+          \item We're looking at a small slice of the web
+        \end{itemize}
+    \item Edges are links, vertices are web pages
+        \begin{itemize}
+          \item Assume equal probability of traversing every link such that
+            \footnote{https://en.wikipedia.org/wiki/PageRank}
+            $\Sigma w_{out} = 1$, where $w$ is the edge weight
+            \begin{itemize}
+              \item The probabilities coming out of every website must sum to 1
+            \end{itemize}
+        \end{itemize}
+  \end{itemize}
+
+  \ctikzfig{internet_graph}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Data}
+  The most complex part is by far the data collection
+  \begin{itemize}
+  \item Start at an arbitrary website, perform BFS to create an adjacency list
+    that represents the internet
+      \begin{itemize}
+        \item Keep track of visited nodes to avoid duplicate processing
+      \end{itemize}
+  \item Stop after storing \_\_ thousand links % TODO: UPDATE WITH NUMBER OF LINKS IN ADJ LIST
+      \begin{itemize}
+        \item I don't have the computing power of Google
+      \end{itemize}
+  \end{itemize}
+
+  \ctikzfig{internet_graph}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Data (cont'd)}  
+  Adjacency list $A$ stores links between pages \\
+  If $A_{ij} = 1$, there is a link from page $i$ to page $j$
+  $$
+    A = 
+    \begin{bmatrix}
+    a_{00} & \dots & a_{0n}\\ 
+    \vdots & \ddots & \vdots \\ 
+    a_{n0} & \dots & a_{nn} 
+    \end{bmatrix}
+  $$
+  Normalize the adjacency list to satisfy $\forall i \  \Sigma w_{out} = \Sigma w_i = 1$ \\
+  We now have a transition matrix!
+\end{frame}
+
+\begin{frame}
+  \frametitle{Benchmarking}
+  Start at a given page
+\end{frame}
+
+\end{document}
