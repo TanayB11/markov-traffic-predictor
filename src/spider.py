@@ -3,8 +3,8 @@ from collections import deque
 import requests, re, json
 import numpy as np
 
-START_PAGE = 'https://tanaybiradar.com'
-MAT_SIZE = 500
+START_PAGE = 'https://github.com/TanayB11'
+MAT_SIZE = 2000
 freq_mat = np.zeros((MAT_SIZE, MAT_SIZE))
 link_ids = {} # key = link, value = index in freq matrix
 
@@ -26,7 +26,13 @@ def crawl(source):
     if not source in link_ids: # assign a new id
         link_ids[source] = len(link_ids)
 
-    html = requests.get(source).text
+    try:
+        html = requests.get(source).text
+    except requests.exceptions.SSLError:
+        CSI = "\x1B["
+        print(CSI+"31;40m" + "An SSL Error occurred." + CSI + "0m")
+        return
+
     links = find_links(html) # pages source links to
     edge_ids = [link_ids[link] for link in links] # ids of pages source connects to
 
@@ -53,6 +59,9 @@ def main():
         page = q.popleft() # dequeue
         links = crawl(page)
         crawled.add(page)
+
+        if links == None:
+            continue
 
         for link in links:
             if link not in crawled:

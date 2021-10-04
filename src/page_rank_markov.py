@@ -34,7 +34,7 @@ def diagonalize(trans_mat): # P is noninvertible, cannot diagonalize
     return P, D, np.linalg.inv(P)
 
 def main():
-    START_LINK = 'https://atom.io'
+    START_LINK = 'https://github.com'
     trans_mat = np.loadtxt('transition_matrix.out')
 
     # cannot eigensolve, P is noninvertible
