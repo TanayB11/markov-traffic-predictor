@@ -106,6 +106,7 @@
 \begin{frame}
   \frametitle{Benchmarking}
   \begin{itemize}
+    \item Create adjacency list starting at my personal website
     \item Create a state vector
       \begin{itemize}
         \item Create a 0 vector with same number of dimensions as rows in $T$ \\
@@ -135,6 +136,39 @@
 
 \begin{frame}
   \frametitle{Results}
+  \begin{itemize}
+    \item After 1000 steps:
+    \item \href{https://github.com}{https://github.com} $\rightarrow$ \href{https://services.github.com}{https://services.github.com}
+        \begin{itemize}
+          \item Landing on as subdomain seems reasonable
+        \end{itemize}
+    \item \href{https://irs.gov/}{https://irs.gov/} $\rightarrow$ \href{https://irs.gov/}{https://irs.gov/}
+        \begin{itemize}
+          \item Since our model of the internet is limited, we likely didn't explore
+            many links leading away from this website
+        \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Discussion}  
+  \begin{itemize}
+    \item Limitations: We only have access to a limited snapshot of the internet
+        \begin{itemize}
+          \item Most links are internal (same domain)
+          \item Many pages have few outgoing links due
+        \end{itemize}
+    \item Potential abuse: Websites can artificially inflate their likelihood
+      of being landed on by creating pages with many links to another page
+    \item If the model is larger, it might work in predicting website traffic, but
+      it is not reliable in practice
+    \item Potential improvement: Consider "quality" of incoming links  like PageRank
+      does \footnote{https://web.stanford.edu/class/cs54n/handouts/24-GooglePageRankAlgorithm.pdf}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Thank you!}
 \end{frame}
 
 \end{document}

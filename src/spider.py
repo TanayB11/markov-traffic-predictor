@@ -3,7 +3,7 @@ from collections import deque
 import requests, re, json
 import numpy as np
 
-START_PAGE = 'https://github.com/TanayB11'
+START_PAGE = 'https://tanaybiradar.com'
 MAT_SIZE = 2000
 freq_mat = np.zeros((MAT_SIZE, MAT_SIZE))
 link_ids = {} # key = link, value = index in freq matrix

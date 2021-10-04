@@ -37,9 +37,6 @@ def main():
     START_LINK = 'https://github.com'
     trans_mat = np.loadtxt('transition_matrix.out')
 
-    # cannot eigensolve, P is noninvertible
-    # simluate_eig(trans_mat)
-
     result = run_markov_chain(START_LINK, trans_mat, 1000)
     print(result)
 
