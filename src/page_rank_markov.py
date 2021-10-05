@@ -11,12 +11,11 @@ def run_markov_chain(start_link, trans_mat, num_iters):
     for _ in range(num_iters):
         state_vector = np.matmul(trans_mat, state_vector)
 
-        likely_site = np.argmax(state_vector)
-        state_vector = np.zeros(len(state_vector))
-        state_vector[likely_site] = 1
+    # https://stackoverflow.com/questions/6910641/how-do-i-get-indices-of-n-maximum-values-in-a-numpy-array
+    likely_sites = state_vector.argsort()[-10:][::-1]
 
     link_ids_inverted = {value: key for key, value in link_ids.items()}
-    return link_ids_inverted[likely_site]
+    return ([link_ids_inverted[s] for s in likely_sites])
 
 def diagonalize(trans_mat): # P is noninvertible, cannot diagonalize
     eigval, eigvec = np.linalg.eig(trans_mat)
@@ -34,10 +33,10 @@ def diagonalize(trans_mat): # P is noninvertible, cannot diagonalize
     return P, D, np.linalg.inv(P)
 
 def main():
-    START_LINK = 'https://github.com'
+    START_LINK = 'https://tanaybiradar.com'
     trans_mat = np.loadtxt('transition_matrix.out')
 
-    result = run_markov_chain(START_LINK, trans_mat, 1000)
+    result = run_markov_chain(START_LINK, trans_mat, 10000)
     print(result)
 
 
