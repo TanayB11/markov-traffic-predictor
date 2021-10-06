@@ -3,8 +3,8 @@ from collections import deque
 import requests, re, json
 import numpy as np
 
-START_PAGE = 'https://tanaybiradar.com'
-MAT_SIZE = 2000
+START_PAGE = 'https://en.wikipedia.org/wiki/Arijit_Singh'
+MAT_SIZE = 5000
 freq_mat = np.zeros((MAT_SIZE, MAT_SIZE))
 link_ids = {} # key = link, value = index in freq matrix
 
@@ -12,8 +12,10 @@ def find_links(html): # returns unique links
     soup = bs(html, 'html.parser')
     links = set()
 
-    for link in soup.find_all('a', attrs={'href': re.compile('^https://')}):
-        href = link.get('href')
+    # for link in soup.find_all('a', attrs={'href': re.compile('^Https://')}):
+    # Restricted only to Wikipedia links
+    for link in soup.find_all('a', attrs={'href': re.compile('^/wiki/')}):
+        href = 'https://en.wikipedia.org' + link.get('href')
         if not href in link_ids:
             link_ids[href] = len(link_ids)
 

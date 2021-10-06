@@ -33,10 +33,10 @@ def diagonalize(trans_mat): # P is noninvertible, cannot diagonalize
     return P, D, np.linalg.inv(P)
 
 def main():
-    START_LINK = 'https://tanaybiradar.com'
+    START_LINK = 'https://en.wikipedia.org/wiki/Shah_Rukh_Khan'
     trans_mat = np.loadtxt('transition_matrix.out')
 
-    result = run_markov_chain(START_LINK, trans_mat, 10000)
+    result = run_markov_chain(START_LINK, trans_mat, 10)
     print(result)
 
 
