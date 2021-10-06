@@ -2,6 +2,8 @@
 __pycache__/
 env/
 
+presentation/
+
 *.out
 *.json
 *.swp
